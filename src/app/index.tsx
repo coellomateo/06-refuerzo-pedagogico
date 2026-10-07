@@ -1,23 +1,3 @@
-/**
- * ============================================================================
- * 🥊 RETO 04 — Contenedor del Bar Salesiano (useState directo)
- * Módulo: Programación Móvil — 3° Bachillerato Técnico (UETS)
- * ============================================================================
- *
- * 📖 MISIÓN:
- * Conectar el dominio (Reto 01) con los componentes (Retos 02 y 03) usando
- * `useState` directamente en la pantalla. NADA de custom hooks todavía: eso
- * llega en la Semana 09.
- *
- * 🛠️ INSTRUCCIONES:
- *  1. Implementa `incrementar`, `decrementar` y `reiniciar` reutilizando
- *     `calcularValor` del dominio (no sumes a mano).
- *  2. Usa `estadoUI` para deshabilitar los botones en los límites.
- *  3. INTEGRADOR: agrega 2 contadores más (Empanadas y Jugos) repitiendo el
- *     estado.
- *  4. Ejecuta en tu terminal: `pnpm run start:04`
- */
-
 import { useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { BotonContador } from '@/components/BotonContador';
