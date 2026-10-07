@@ -37,9 +37,11 @@ export interface ContadorDisplayProps {
 export function ContadorDisplay({ valor, etiqueta }: ContadorDisplayProps) {
   return (
     <View style={styles.wrap}>
-      {/* 🤔 ¿Cómo muestras la etiqueta solo cuando viene, sin romper si falta? */}
+      {/* Renders condicional mediante cortocircuito (`&&`) */}
+      {etiqueta && <Text style={styles.etiqueta}>{etiqueta}</Text>}
       <Text style={styles.valor}>{valor}</Text>
     </View>
+  
   );
 }
 
