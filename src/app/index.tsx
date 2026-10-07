@@ -25,25 +25,22 @@ import { ContadorDisplay } from '@/components/ContadorDisplay';
 import { calcularValor, estadoUI, type ContadorConfig } from '@/domain/counter';
 
 export default function Home() {
-  // 🔎 ¿Por qué el estado arranca en 0? ¿Qué cambiaría si empezara en otro valor?
   const [valor, setValor] = useState(0);
 
-  // 🔎 ¿Qué representa cada campo? ¿Por qué `valor` viene del estado y el resto son fijos?
   const config: ContadorConfig = { valor, paso: 1, minimo: 0, maximo: 10 };
 
-  // 🔎 ¿Por qué calculamos `estado` y no lo guardamos en otro useState?
   const estado = estadoUI(valor, config);
 
-  // 👉 Antes de implementar, revisa el TSDoc de `calcularValor` (src/domain/counter.ts):
-  //    ahí está el contrato; tú escribes el cómo.
   const incrementar = () => {
-    
+    setValor(calcularValor(config, 'incrementar'));
   };
+
   const decrementar = () => {
-    
+    setValor(calcularValor(config, 'decrementar'));
   };
+
   const reiniciar = () => {
-    
+    setValor(0);
   };
 
   return (
@@ -51,10 +48,8 @@ export default function Home() {
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={styles.title}>Bar Salesiano · Contadores</Text>
 
-        {/* 📖 ¿Qué props acepta? Revisa el TSDoc de <ContadorDisplay> */}
         <ContadorDisplay valor={valor} etiqueta="Sanduches" />
 
-        {/* 📖 Revisa el TSDoc de <BotonContador>: props, variantes y feedback */}
         <View style={styles.actions}>
           <BotonContador
             label="+1"
@@ -71,8 +66,41 @@ export default function Home() {
           <BotonContador label="Reiniciar" onPress={reiniciar} variante="danger" />
         </View>
 
-        {/* 👇 TODO INTEGRADOR: agrega los contadores de Empanadas y Jugos
-            repitiendo el estado (const [.., ..] = useState(0)) y sus botones. */}
+        <ContadorDisplay valor={valor} etiqueta="Empanadas" />
+
+        <View style={styles.actions}>
+          <BotonContador
+            label="+1"
+            onPress={incrementar}
+            variante="primary"
+            disabled={estado === 'MAXIMO'}
+          />
+          <BotonContador
+            label="-1"
+            onPress={decrementar}
+            variante="secondary"
+            disabled={estado === 'MINIMO'}
+          />
+          <BotonContador label="Reiniciar" onPress={reiniciar} variante="danger" />
+        </View>
+
+        <ContadorDisplay valor={valor} etiqueta="Jugos" />
+
+        <View style={styles.actions}>
+          <BotonContador
+            label="+1"
+            onPress={incrementar}
+            variante="primary"
+            disabled={estado === 'MAXIMO'}
+          />
+          <BotonContador
+            label="-1"
+            onPress={decrementar}
+            variante="secondary"
+            disabled={estado === 'MINIMO'}
+          />
+          <BotonContador label="Reiniciar" onPress={reiniciar} variante="danger" />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
